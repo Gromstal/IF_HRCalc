@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Добро пожаловать</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="main-container">
+    <div class="left-block">
+        <div class="form-container">
+            <h1>Калькулятор кадровика</h1>
+           <br/>
+           <br/>
+           <br/>
+
+            <form th:action="@{/}" method="post">
+                <div>
+                    <label for="salaryNet">Зарплата на руки:</label><br>
+                    <input type="text" id="salaryNet" name="salaryNet" th:value="${requestSum.salaryNet}"
+                           pattern="^\d+(\.\d+)?$"
+                           required>
+                </div>
+                <br>
+                <div>
+                    <label for="regionCoefficient">Районный коэффициент:</label><br>
+                    <input type="text" id="regionCoefficient" name="regionCoefficient" th:value="${requestSum.regionCoefficient}"
+                           pattern="^\d+(\.\d+)?$"
+                           required>
+                </div>
+                <br>
+                <div>
+                    <label for="northCoefficient">Северная надбавка (в %):</label><br>
+                    <input type="text" id="northCoefficient" name="northCoefficient" th:value="${requestSum.northCoefficient}"
+                           pattern="^\d+(\.\d+)?$"
+                           required>
+                </div>
+                <br>
+
+                <button type="submit" class="btn">Посчитать</button>
+            </form>
+
+
+            <div class="logo-container">
+                <img src="/images/iFellow_logo.png" alt="Логотип">
+            </div>
+        </div>
+    </div>
+
+    <div class="right-block" th:if="${result != null}">
+        <div class="results-container">
+            <div class="result">
+                <label for="salaryGrossFull">Оклад гросс со всеми надбавками:</label>
+                <input type="text" id="salaryGrossFull" th:value="${result.salaryGrossFull}" disabled>
+            </div>
+            <div class="result">
+                <label for="salaryGrossOnlyWithRegionCoefficient">Оклад гросс с районным коэффициентом:</label>
+                <input type="text" id="salaryGrossOnlyWithRegionCoefficient" th:value="${result.salaryGrossOnlyWithRegionCoefficient}" disabled>
+            </div>
+            <div class="result">
+                <label for="salaryClearWithoutCoeffs">Оклад гросс без надбавок:</label>
+                <input type="text" id="salaryClearWithoutCoeffs" th:value="${result.salaryClearWithoutCoeffs}" disabled>
+            </div>
+            <div class="result">
+                <label for="northSup">Северная надбавка:</label>
+                <input type="text" id="northSup" th:value="${result.northSup}" disabled>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
