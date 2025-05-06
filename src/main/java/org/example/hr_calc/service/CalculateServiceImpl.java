@@ -17,9 +17,7 @@ public class CalculateServiceImpl implements CalculateService {
 
         result.setSalaryGrossFull( //оклад гросс со всеми надбавками
                 requestSum.getSalaryNet()
-                        .divide(divisor, 0, RoundingMode.UP)
-                        .divide(new BigDecimal("1000"), 0, RoundingMode.UP)
-                        .multiply(new BigDecimal("1000")));
+                        .divide(divisor, 0, RoundingMode.CEILING));
 
         result.setSumOfСoefficients( //сумма всех коэффициентов и надбавок
                 requestSum.getRegionCoefficient().add(requestSum.getNorthCoefficient()));
